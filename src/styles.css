@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files 
+#276e90
+#CECFC9
+#0A3143
+#EFEFEF
+#7CCCE5
+
+#636266, #c3da56, #c27a9f, #e54938, #fde569, #91cee1, #fdecaa, #b8b69d
+
+azules
+#1f80a2, #89e789, #86a1c7, #cc605a, #fceea7, #2ddfed, #faf2cd, #74cfc6
+*/
+form{
+ 
+}
+body {
+    background-color: #EFEFEF;
+}
+
+label {
+    color: rgb(62, 62, 62);
+}

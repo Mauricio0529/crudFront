@@ -1,0 +1,105 @@
+<!--
+    VAMOS A MOSTRAR EL FORMULARIO QUE HICIMOS EN EL APP.COMPONENT.TS
+    Se importa el  ReactiveFormsModule en src/app.module.ts para el formGroup
+-->
+<div class="formularioRegistro">
+    <h1>Crear Usuario</h1>
+    <form [formGroup] = "personForm" (ngSubmit) = "save()" >
+        <div class="form-group">
+            <label><b>Nombre:</b></label>
+            <!-- 
+                Usamos el formControlName para asociar la variable nombre 
+                que creamos en el formulario en app.component.ts 
+            -->
+            <input type="text" formControlName="nombre" class="form-control" >
+        </div>
+
+        <div class="form-group">
+            <label><b>Apellido:</b></label>
+            <input type="text" formControlName="apellido" class="form-control" >
+        </div>
+
+        <div class="form-group">
+            <label><b>Edad:</b></label>
+            <input type="number" formControlName="edad" class="form-control" >
+        </div>
+    
+        <div class="form-group">
+            <label><b>Pais:</b></label>
+            <select name="country" id="country" formControlName="country" class="form-control" >
+                
+                <!--Vamos a traer los paises de la base de datos
+                countrys: esta variable se crea parar recorrer la informacion,
+                esta se usa en el app.component.ts-->
+                <!--encerramos la variable [value] para obtener el valor seleccionado
+                
+                   idCountry (change)="cargarEstadosPorPais($event)"
+
+                -->
+                <option [ngValue]="item" *ngFor="let item of countrys">
+
+                    <!-- el nameCountry es el nombre de la variable de pais de java -->
+                    {{item.nameCountry}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label><b>Estado o Departamento:</b></label>
+            <select name="state" id="state" formControlName="state" class="form-control" >
+                <!--Vamos a traer los paises de la base de datos
+                countrys: esta variable se crea parar recorrer la informacion,
+                esta se usa en el app.component.ts idState-->
+                <option [ngValue]="item" *ngFor="let item of states">
+                    <!-- el nameState es el nombre de la variable de estado de java -->
+                    {{item.nameState}}
+                </option>
+            </select>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" [disabled]="personForm.invalid">Crear</button>
+    </form>
+</div>
+
+<div class="formularioRegistro">
+    <h2>Personas Registradas</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Pais</th>
+                <th>Estado</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let item of persons">
+                
+                <!-- 
+                    variables del modelo de person en java.
+                    el item, es del nFor del tr para que recorra la tabla 
+                -->
+                <td>{{item.idPersona}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.apellido}}</td>
+                <td>{{item.edad}}</td>
+
+                <!-- variables de las clases modelo de person y country en java -->
+                <td>{{item.country.nameCountry}}</td>
+                <td>{{item.state.nameState}}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="deletePersons(item)">Eliminar</button>
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-success" (click)="editPerson(item)">Editar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
